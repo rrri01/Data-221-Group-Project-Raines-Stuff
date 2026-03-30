@@ -12,7 +12,19 @@ from sklearn.preprocessing import LabelEncoder
 
 california_house_prices = pd.read_csv('housing.csv', delimiter=',')
 
-california_house_prices = california_house_prices.replace({"NEAR BAY": 0, "<1H OCEAN": 1, "INLAND": 2, "NEAR OCEAN": 3, "ISLAND": 4})
+#fill in the missing values (the missing values are usually present in total_bedrooms)
+california_house_prices["total_bedrooms"] = california_house_prices["total_bedrooms"].fillna(california_house_prices["total_bedrooms"].median())
+
+# mapping (converting categorical to numerical)
+mapping = {
+    "INLAND": 0,
+    "NEAR OCEAN": 1,
+    "NEAR BAY": 2,
+    "ISLAND": 3,
+    "<1H OCEAN": 4
+}
+
+california_house_prices["ocean_proximity"] = california_house_prices["ocean_proximity"].map(mapping)
 
 
 # creates feature matrix X of all columns except "median_house_value" and create label vector y as "median_house_value"
