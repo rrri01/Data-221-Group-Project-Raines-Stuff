@@ -2,22 +2,15 @@
 # group repository link for my own reference: https://github.com/chloeptrsn/DATA-221-Project.git
 
 import pandas as pd
-from sklearn import metrics
-
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score, f1_score
-import numpy as np
-
-from tensorflow.keras.utils import to_categorical
-from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 import tensorflow as tf
-from tensorflow.keras import layers, models
+
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, InputLayer
 
-
 from sklearn.metrics import root_mean_squared_error, r2_score
+
 california_house_prices = pd.read_csv('housing.csv', delimiter=',')
 
 #fill in the missing values (the missing values are usually present in total_bedrooms)
