@@ -10,6 +10,11 @@ import numpy as np
 from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
+import tensorflow as tf
+from tensorflow.keras import layers, models
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, InputLayer
+
 california_house_prices = pd.read_csv('housing.csv', delimiter=',')
 
 #fill in the missing values (the missing values are usually present in total_bedrooms)
@@ -33,6 +38,25 @@ target_prices = california_house_prices["median_house_value"]
 # splits the data into training data and testing data
 features_train, features_test, y_train, y_test = train_test_split(feature_matrix, target_prices, test_size=0.3, random_state=42)
 
+# scale data:
 scaling = StandardScaler()
 features_train = scaling.fit_transform(features_train)
 features_test = scaling.transform(features_test)
+
+# neural network code and then print results
+tf.random.set_seed(1)
+neural_network_model = Sequential()
+
+input_layer = InputLayer(input_shape=(9,))
+neural_network_model.add(input_layer)
+hidden_layer = Dense(3)
+neural_network_model.add(hidden_layer)
+
+second_hidden_layer = Dense(5)
+neural_network_model.add(second_hidden_layer)
+third_hidden_layer = Dense(2)
+neural_network_model.add(third_hidden_layer)
+
+output_layer = Dense(1)
+neural_network_model.add(output_layer)
+
